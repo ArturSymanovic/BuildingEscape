@@ -18,18 +18,8 @@ UOpenDoor::UOpenDoor()
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
-	Super::BeginPlay();
-
-	FRotator ClosedDoorRotation = GetOwner()->GetActorRotation();
-	FRotator OpenedDoorRotation = ClosedDoorRotation;
-	//FRotator OpenedDoorRotation = FRotator(ClosedDoorRotation);
-	OpenedDoorRotation.Yaw += 90.f;
-	UE_LOG(LogTemp, Warning, TEXT("ClosedDoorRotation Yaw: %f"), ClosedDoorRotation.Yaw);
-	UE_LOG(LogTemp, Warning, TEXT("OpenedDoorRotation Yaw: %f"), OpenedDoorRotation.Yaw);
-	
-	GetOwner()->SetActorRotation(OpenedDoorRotation);
-	// ...
-	
+	Super::BeginPlay();	
+	InitialYaw = GetOwner()->GetActorRotation().Yaw;
 }
 
 
@@ -38,6 +28,16 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	FRotator CurrentDoorRotation = GetOwner()->GetActorRotation();
+	FRotator NextDoorRotation = FRotator(CurrentDoorRotation);
+	//float YawStep = FMath::Lerp(CurrentDoorRotation.Yaw, TargetYaw, 0.05f);
+	float YawStep = FMath::FInterpTo(CurrentDoorRotation.Yaw, TargetYaw, DeltaTime, 1);
+	NextDoorRotation.Yaw = YawStep;
+
+	UE_LOG(LogTemp, Warning, TEXT("CurrentDoorRotation Yaw: %f"), CurrentDoorRotation.Yaw);
+	UE_LOG(LogTemp, Warning, TEXT("NextDoorRotation Yaw: %f"), NextDoorRotation.Yaw);
+	
+	GetOwner()->SetActorRotation(NextDoorRotation);
+		
 }
 
