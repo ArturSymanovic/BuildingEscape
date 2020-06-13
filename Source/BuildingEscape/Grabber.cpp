@@ -19,7 +19,7 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	UE_LOG(LogTemp, Warning, TEXT("Hello!"));
 	
 }
 
@@ -29,6 +29,8 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorEyesViewPoint(ViewLocation, ViewRotation);	
+	UE_LOG(LogTemp, Warning, TEXT("View Location: %s"), *ViewLocation.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("View Rotation: %s"), *ViewRotation.ToString());
 }
 

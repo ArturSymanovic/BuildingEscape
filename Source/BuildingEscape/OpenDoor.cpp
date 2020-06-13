@@ -58,8 +58,8 @@ void UOpenDoor::OpenDoor(float DeltaTime)
 	FRotator NextDoorRotation = FRotator(CurrentDoorRotation);
 	float YawStep = FMath::FInterpTo(CurrentDoorRotation.Yaw, TargetYaw, DeltaTime, 1);
 	NextDoorRotation.Yaw = YawStep;
-	UE_LOG(LogTemp, Warning, TEXT("CurrentDoorRotation Yaw: %f"), CurrentDoorRotation.Yaw);
-	UE_LOG(LogTemp, Warning, TEXT("NextDoorRotation Yaw: %f"), NextDoorRotation.Yaw);	
+	//UE_LOG(LogTemp, Warning, TEXT("CurrentDoorRotation Yaw: %f"), CurrentDoorRotation.Yaw);
+	//UE_LOG(LogTemp, Warning, TEXT("NextDoorRotation Yaw: %f"), NextDoorRotation.Yaw);	
 	GetOwner()->SetActorRotation(NextDoorRotation);		
 }
 
@@ -69,8 +69,8 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 	FRotator NextDoorRotation = FRotator(CurrentDoorRotation);
 	float YawStep = FMath::FInterpTo(CurrentDoorRotation.Yaw, InitialYaw, DeltaTime, 1);
 	NextDoorRotation.Yaw = YawStep;
-	UE_LOG(LogTemp, Warning, TEXT("CurrentDoorRotation Yaw: %f"), CurrentDoorRotation.Yaw);
-	UE_LOG(LogTemp, Warning, TEXT("NextDoorRotation Yaw: %f"), NextDoorRotation.Yaw);	
+	//UE_LOG(LogTemp, Warning, TEXT("CurrentDoorRotation Yaw: %f"), CurrentDoorRotation.Yaw);
+	//UE_LOG(LogTemp, Warning, TEXT("NextDoorRotation Yaw: %f"), NextDoorRotation.Yaw);	
 	GetOwner()->SetActorRotation(NextDoorRotation);			
 }
 
