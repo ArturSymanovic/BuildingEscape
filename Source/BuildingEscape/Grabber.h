@@ -7,6 +7,7 @@
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
+#include "DrawDebugHelpers.h"
 #include "Grabber.generated.h"
 
 
