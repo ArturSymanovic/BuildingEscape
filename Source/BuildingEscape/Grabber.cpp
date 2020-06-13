@@ -3,6 +3,8 @@
 
 #include "Grabber.h"
 
+#define OUT
+
 // Sets default values for this component's properties
 UGrabber::UGrabber()
 {
@@ -33,8 +35,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	//UE_LOG(LogTemp, Warning, TEXT("View Location: %s"), *ViewLocation.ToString());
 	//UE_LOG(LogTemp, Warning, TEXT("View Rotation: %s"), *ViewRotation.ToString());
 
-	FVector LineTraceEnd = ViewLocation + FVector(0.f, 0.f, 100.f);
-	LineTraceEnd = ViewLocation + ViewRotation.Vector() * 100.f;
+	FVector LineTraceEnd = ViewLocation + ViewRotation.Vector() * Reach;
 	DrawDebugLine(
 		GetWorld(),
 		ViewLocation,
@@ -46,5 +47,18 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		1.f
 	);
 
+	FHitResult Hit;
+	FCollisionQueryParams TraceParams(FName(TEXT("")), false, GetOwner());
+	bool IsHit = GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		ViewLocation,
+		LineTraceEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		TraceParams
+	);
+	if (IsHit)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *Hit.GetActor()->GetName());
+	}
 }
 

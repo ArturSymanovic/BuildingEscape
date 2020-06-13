@@ -32,5 +32,6 @@ private:
 
 	FVector ViewLocation;
 	FRotator ViewRotation;
+	float Reach = 100.f;
 
 };
