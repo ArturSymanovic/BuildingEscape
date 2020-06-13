@@ -44,4 +44,9 @@ ATriggerVolume* PressurePlate;
 UPROPERTY(EditAnywhere)
 AActor* ActorThatOpen;
 
+float DoorLastOpened = 0.f;
+
+UPROPERTY(EditAnywhere)
+float DoorCloseDelay = 2.f;
+
 };
